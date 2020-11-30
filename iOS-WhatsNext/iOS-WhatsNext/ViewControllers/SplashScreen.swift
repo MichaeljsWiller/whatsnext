@@ -8,10 +8,14 @@
 import UIKit
 import SnapKit
 
+public protocol SplashScreenDelegate {
+    func splashCompleted()
+}
+
 class SplashScreenVC: UIViewController {
     
     let splashScreenImage = UIImageView(image: UIImage(named: "NewLogo"))
-    weak var delegate : SplashScreenVCDelegate?
+    var delegate: SplashScreenDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,10 @@ class SplashScreenVC: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.splashCompleted()
+    }
+        
     func splashAnimation() {
         UIView.animate(withDuration: 0.5, animations: {
             self.splashScreenImage.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
@@ -36,11 +44,11 @@ class SplashScreenVC: UIViewController {
     }
     
     func removeAnimation() {
-        UIView.animate(withDuration: 0.5, delay: 0.1, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 2, delay: 0.1, options: .curveEaseOut, animations: {
             self.splashScreenImage.alpha = 0
             
         }) { ( success ) in
-            self.navigationController?.popViewController(animated: true)
+            self.viewWillDisappear(true)
         }
     }
     
@@ -53,7 +61,7 @@ class SplashScreenVC: UIViewController {
     }
 }
 
-protocol SplashScreenVCDelegate: class {
-    func splashCompleted(_ splash: SplashScreenVC)
+extension SplashScreenVC: SplashScreenDelegate {
+    func splashCompleted() {
+    }
 }
-

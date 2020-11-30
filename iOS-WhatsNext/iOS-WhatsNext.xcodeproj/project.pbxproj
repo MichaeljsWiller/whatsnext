@@ -10,9 +10,9 @@
 		048799092558650B0069F16C /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048799082558650B0069F16C /* Coordinator.swift */; };
 		048E55E025575DBE00ED2193 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E55DF25575DBE00ED2193 /* SplashScreen.swift */; };
 		048E55E62557685300ED2193 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 048E55E52557685300ED2193 /* SnapKit */; };
+		04C10FDE255B698500007128 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C10FDD255B698500007128 /* MainView.swift */; };
 		04D60BA92540BE94006F47FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BA82540BE94006F47FC /* AppDelegate.swift */; };
 		04D60BAB2540BE94006F47FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BAA2540BE94006F47FC /* SceneDelegate.swift */; };
-		04D60BAD2540BE94006F47FC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BAC2540BE94006F47FC /* ViewController.swift */; };
 		04D60BB22540BE95006F47FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D60BB12540BE95006F47FC /* Assets.xcassets */; };
 		04D60BB52540BE95006F47FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D60BB32540BE95006F47FC /* LaunchScreen.storyboard */; };
 		04D60BC02540BE96006F47FC /* iOS_WhatsNextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BBF2540BE96006F47FC /* iOS_WhatsNextTests.swift */; };
@@ -39,10 +39,10 @@
 /* Begin PBXFileReference section */
 		048799082558650B0069F16C /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		048E55DF25575DBE00ED2193 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		04C10FDD255B698500007128 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		04D60BA52540BE94006F47FC /* iOS-WhatsNext.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-WhatsNext.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D60BA82540BE94006F47FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04D60BAA2540BE94006F47FC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		04D60BAC2540BE94006F47FC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		04D60BB12540BE95006F47FC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04D60BB42540BE95006F47FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04D60BB62540BE95006F47FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +83,7 @@
 		0487990425585A470069F16C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				04C10FDD255B698500007128 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -95,12 +96,12 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		048E55DE25575DA100ED2193 /* Models */ = {
+		048E55DE25575DA100ED2193 /* AppCoordinator */ = {
 			isa = PBXGroup;
 			children = (
 				048799082558650B0069F16C /* Coordinator.swift */,
 			);
-			path = Models;
+			path = AppCoordinator;
 			sourceTree = "<group>";
 		};
 		04D60B9C2540BE94006F47FC = {
@@ -126,12 +127,11 @@
 		04D60BA72540BE94006F47FC /* iOS-WhatsNext */ = {
 			isa = PBXGroup;
 			children = (
-				048E55DE25575DA100ED2193 /* Models */,
+				048E55DE25575DA100ED2193 /* AppCoordinator */,
 				0487990425585A470069F16C /* Views */,
 				048E55DD25575D8D00ED2193 /* ViewControllers */,
 				04D60BA82540BE94006F47FC /* AppDelegate.swift */,
 				04D60BAA2540BE94006F47FC /* SceneDelegate.swift */,
-				04D60BAC2540BE94006F47FC /* ViewController.swift */,
 				04D60BB12540BE95006F47FC /* Assets.xcassets */,
 				04D60BB32540BE95006F47FC /* LaunchScreen.storyboard */,
 				04D60BB62540BE95006F47FC /* Info.plist */,
@@ -293,7 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				048E55E025575DBE00ED2193 /* SplashScreen.swift in Sources */,
-				04D60BAD2540BE94006F47FC /* ViewController.swift in Sources */,
+				04C10FDE255B698500007128 /* MainView.swift in Sources */,
 				048799092558650B0069F16C /* Coordinator.swift in Sources */,
 				04D60BA92540BE94006F47FC /* AppDelegate.swift in Sources */,
 				04D60BAB2540BE94006F47FC /* SceneDelegate.swift in Sources */,
