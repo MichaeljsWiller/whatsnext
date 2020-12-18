@@ -34,7 +34,6 @@ class AppCoordinator: Coordinator, SplashScreenDelegate {
     }
     
     func splashCompleted() {
-        navigationController.popViewController(animated: true)
         showMain()
     }
 }

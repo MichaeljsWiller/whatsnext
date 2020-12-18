@@ -8,7 +8,6 @@
 import UIKit
 
 class MainView: UIViewController {
-    weak var delegate: AppCoordinator?
     private let viewModel = MainViewModel()
     private var createListButton: UIButton!
     private var headerImageView: UIImageView!
@@ -55,6 +54,7 @@ class MainView: UIViewController {
         createListButton.titleLabel?.font = UIFont(name: "PTSans-Bold", size: 20)
         createListButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -50, bottom: 16, right: 0)
         createListButton.titleEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 18, right: 1)
+        createListButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         view.addSubview(createListButton)
         
         noListsImageView = UIImageView()
@@ -74,6 +74,10 @@ class MainView: UIViewController {
         noListSubtitle.textColor = .lightGray
         noListSubtitle.alpha = 0.55
         noListsImageView.addSubview(noListSubtitle)
+    }
+    
+    @objc func didTapButton() {
+        navigationController?.pushViewController(ShoppingListView(), animated: true)
     }
     
     private func setupConstraints() {
