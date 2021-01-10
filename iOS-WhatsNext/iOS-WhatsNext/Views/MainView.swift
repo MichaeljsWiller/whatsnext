@@ -77,6 +77,7 @@ class MainView: UIViewController {
     }
     
     @objc func didTapButton() {
+       // navigationController?.popToViewController(ShoppingListView(), animated: true)
         navigationController?.pushViewController(ShoppingListView(), animated: true)
     }
     

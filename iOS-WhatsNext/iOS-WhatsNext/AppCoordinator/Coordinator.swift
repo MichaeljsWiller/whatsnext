@@ -28,13 +28,13 @@ class AppCoordinator: Coordinator, SplashScreenDelegate {
         window.makeKeyAndVisible()
     }
     
-    func showMain() {
-        let vc = MainView()
-        navigationController.pushViewController(vc, animated: false)
-    }
-    
     func splashCompleted() {
         showMain()
+    }
+
+    func showMain() {
+        let view = MainView()
+        navigationController.pushViewController(view, animated: false)
     }
 }
 
