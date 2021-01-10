@@ -77,7 +77,6 @@ class MainView: UIViewController {
     }
     
     @objc func didTapButton() {
-       // navigationController?.popToViewController(ShoppingListView(), animated: true)
         navigationController?.pushViewController(ShoppingListView(), animated: true)
     }
     
@@ -121,14 +120,11 @@ class MainView: UIViewController {
             noListTitle.snp.makeConstraints { make in
                 make.centerY.equalToSuperview().offset(-10)
                 make.centerX.equalToSuperview()
-               // make.width.equalToSuperview().dividedBy(2)
             }
             
             noListSubtitle.snp.makeConstraints { make in
                 make.centerX.equalToSuperview()
-                make.top.equalTo(noListTitle.snp.bottom).offset(5)
-               // make.width.equalToSuperview().dividedBy(2)
-            }
+                make.top.equalTo(noListTitle.snp.bottom).offset(5)            }
         }
     }
 }

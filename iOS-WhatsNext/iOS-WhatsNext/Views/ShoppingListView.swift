@@ -20,7 +20,6 @@ class ShoppingListView: UIViewController {
         view.backgroundColor = .white
         setupViews()
         setupConstraints()
-        //setupSwipeGesture()
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
    
@@ -54,7 +53,7 @@ class ShoppingListView: UIViewController {
         addItemButton.titleLabel?.font = UIFont(name: "PTSans-Bold", size: 20)
         addItemButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -50, bottom: 16, right: 0)
         addItemButton.titleEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 18, right: 1)
-        //addItemButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        addItemButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         view.addSubview(addItemButton)
     }
     
@@ -89,14 +88,7 @@ class ShoppingListView: UIViewController {
         }
     }
     
-    private func setupSwipeGesture() {
-        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes(_:)))
-        rightSwipe.direction = .right
-        view.addGestureRecognizer(rightSwipe)
-    }
-    
-    @objc func handleSwipes(_ sender: UISwipeGestureRecognizer) {
-            navigationController?.popViewController(animated: true)
+    @objc func didTapButton() {
     }
 }
 
