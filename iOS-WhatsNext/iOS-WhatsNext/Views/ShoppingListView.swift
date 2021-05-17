@@ -14,6 +14,8 @@ class ShoppingListView: UIViewController {
     private var headerLogo: UIImageView!
     private var headerTitle: UILabel!
     private var headerSubtitle: UILabel!
+    private var tableView: UITableView!
+    private let reuseId = "reuseId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +57,14 @@ class ShoppingListView: UIViewController {
         addItemButton.titleEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 18, right: 1)
         addItemButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
         view.addSubview(addItemButton)
+        
+        tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.tableHeaderView?.backgroundColor = .clear
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseId)
+        view.addSubview(tableView)
     }
     
     private func setupConstraints() {
@@ -86,9 +96,77 @@ class ShoppingListView: UIViewController {
             make.width.equalToSuperview().dividedBy(1.25)
             make.bottom.equalToSuperview().multipliedBy(0.98)
         }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(headerImageView.snp.bottom).offset(-15)
+            make.bottom.equalTo(addItemButton.snp.top)
+            make.leading.trailing.equalToSuperview()
+        }
     }
     
     @objc func didTapButton() {
+        let alert = UIAlertController(title: "New Item", message: "Enter a new Item:", preferredStyle: .alert)
+        alert.addTextField(configurationHandler: nil)
+        alert.addAction(UIAlertAction(title: "Add", style: .cancel, handler: { [weak self] _ in
+            if let textField = alert.textFields?.first,
+               let item = textField.text {
+                self?.viewModel.addNewItem(item: item)
+                self?.tableView.reloadData()
+            }
+        }))
+        present(alert, animated: true)
+
+    }
+}
+
+
+extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch section {
+        case 1 :
+            return viewModel.currentList.items.count
+        case 2:
+            return viewModel.currentList.tickedItems.count
+        default:
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
+        let currentItem = viewModel.currentList.items[indexPath.row].name
+        let tickedItem = viewModel.currentList.tickedItems[indexPath.row].name
+        let item = indexPath.section == 0 ? currentItem : tickedItem
+        cell.textLabel?.text = item
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        switch section {
+        case 0:
+            return viewModel.currentList.title
+        case 1:
+            return "Ticked off items"
+        default:
+            return "This shouldn't happen lol"
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .black
+        (view as! UITableViewHeaderFooterView).textLabel?.font = UIFont(name: "NewsGothicMT-Bold", size: 16)
+        (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(red: 70/255, green: 91/255, blue: 105/255, alpha: 1)
+        (view as! UITableViewHeaderFooterView).frame(forAlignmentRect: CGRect(x: 0,y: 40,width: self.view.bounds.width,height: 1))
     }
 }
 

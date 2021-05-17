@@ -29,10 +29,6 @@ class SplashScreenVC: UIViewController {
             self.splashAnimation()
         }
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        delegate?.splashCompleted()
-    }
         
     func splashAnimation() {
         UIView.animate(withDuration: 0.5, animations: {
@@ -48,7 +44,7 @@ class SplashScreenVC: UIViewController {
             self.splashScreenImage.alpha = 0
             
         }) { ( success ) in
-            self.viewWillDisappear(true)
+            self.delegate?.splashCompleted()
         }
     }
     
@@ -58,10 +54,5 @@ class SplashScreenVC: UIViewController {
             make.centerY.centerX.equalToSuperview()
             make.height.width.equalTo(150)
         }
-    }
-}
-
-extension SplashScreenVC: SplashScreenDelegate {
-    func splashCompleted() {
     }
 }

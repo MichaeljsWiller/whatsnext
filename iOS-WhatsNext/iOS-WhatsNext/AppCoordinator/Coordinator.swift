@@ -34,7 +34,7 @@ class AppCoordinator: Coordinator, SplashScreenDelegate {
 
     func showMain() {
         let view = MainView()
-        navigationController.pushViewController(view, animated: false)
+        navigationController.pushViewController(view, animated: true)
     }
 }
 

@@ -8,5 +8,5 @@
 import Foundation
 
 class MainViewModel {
-    let savedLists: [String] = []
+    var savedLists: [ShoppingList] = []
 }

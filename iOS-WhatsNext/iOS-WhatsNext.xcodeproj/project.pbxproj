@@ -27,6 +27,7 @@
 		04D60BC02540BE96006F47FC /* iOS_WhatsNextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BBF2540BE96006F47FC /* iOS_WhatsNextTests.swift */; };
 		04D60BCB2540BE96006F47FC /* iOS_WhatsNextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */; };
 		AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */; };
+		AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_WhatsNextUITests.swift; sourceTree = "<group>"; };
 		04D60BCC2540BE96006F47FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModel.swift; sourceTree = "<group>"; };
+		AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,13 +166,6 @@
 			path = news_gothic_mt;
 			sourceTree = "<group>";
 		};
-		04CC9FC7258C444300C161D7 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		04D60B9C2540BE94006F47FC = {
 			isa = PBXGroup;
 			children = (
@@ -197,7 +192,7 @@
 			children = (
 				048E55DE25575DA100ED2193 /* AppCoordinator */,
 				048E55DD25575D8D00ED2193 /* SplashScreen */,
-				04CC9FC7258C444300C161D7 /* Models */,
+				AA3861AE25ABBA1900784F4F /* Models */,
 				0487990425585A470069F16C /* Views */,
 				04CC9F69258C1C7200C161D7 /* ViewModels */,
 				04D60BA82540BE94006F47FC /* AppDelegate.swift */,
@@ -225,6 +220,14 @@
 				04D60BCC2540BE96006F47FC /* Info.plist */,
 			);
 			path = "iOS-WhatsNextUITests";
+			sourceTree = "<group>";
+		};
+		AA3861AE25ABBA1900784F4F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +376,7 @@
 				04CC9FCC258D6B5500C161D7 /* ShoppingListView.swift in Sources */,
 				04C10FDE255B698500007128 /* MainView.swift in Sources */,
 				048799092558650B0069F16C /* Coordinator.swift in Sources */,
+				AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */,
 				04D60BA92540BE94006F47FC /* AppDelegate.swift in Sources */,
 				04D60BAB2540BE94006F47FC /* SceneDelegate.swift in Sources */,
 				AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */,
