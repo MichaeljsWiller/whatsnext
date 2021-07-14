@@ -8,14 +8,11 @@
 import UIKit
 import SnapKit
 
-public protocol SplashScreenDelegate {
-    func splashCompleted()
-}
 
 class SplashScreenVC: UIViewController {
     
     let splashScreenImage = UIImageView(image: UIImage(named: "NewLogo"))
-    var delegate: SplashScreenDelegate?
+    weak var coordinator: AppCoordinator?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +41,7 @@ class SplashScreenVC: UIViewController {
             self.splashScreenImage.alpha = 0
             
         }) { ( success ) in
-            self.delegate?.splashCompleted()
+            self.coordinator?.splashCompleted()
         }
     }
     

@@ -11,7 +11,7 @@ protocol Coordinator {
     func start()
 }
 
-class AppCoordinator: Coordinator, SplashScreenDelegate {
+class AppCoordinator: Coordinator {
     let window: UIWindow
     var navigationController = UINavigationController()
     
@@ -20,10 +20,10 @@ class AppCoordinator: Coordinator, SplashScreenDelegate {
     }
     
     func start() {
-        let vc = SplashScreenVC()
-        navigationController.pushViewController(vc, animated: false)
+        let splashScreenVc = SplashScreenVC()
+        navigationController.pushViewController(splashScreenVc, animated: false)
         navigationController.setNavigationBarHidden(true, animated: false)
-        vc.delegate = self
+        splashScreenVc.coordinator = self
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
@@ -33,8 +33,19 @@ class AppCoordinator: Coordinator, SplashScreenDelegate {
     }
 
     func showMain() {
-        let view = MainView()
-        navigationController.pushViewController(view, animated: true)
+        let mainVc = MainView()
+        let mainViewModel = MainViewModel()
+        mainVc.coordinator = self
+        mainVc.viewModel = mainViewModel
+        navigationController.pushViewController(mainVc, animated: true)
+    }
+    
+    func navigateToShoppingView() {
+        let shoppingListVc = ShoppingListView()
+        let shoppingListViewModel = ShoppingListViewModel()
+        shoppingListVc.coordinator = self
+        shoppingListVc.viewModel = shoppingListViewModel
+        navigationController.pushViewController(shoppingListVc, animated: true)
     }
 }
 

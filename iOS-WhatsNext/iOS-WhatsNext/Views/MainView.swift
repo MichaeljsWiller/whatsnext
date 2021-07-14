@@ -8,7 +8,8 @@
 import UIKit
 
 class MainView: UIViewController {
-    private let viewModel = MainViewModel()
+    var viewModel: MainViewModel?
+    weak var coordinator: AppCoordinator?
     private var createListButton: UIButton!
     private var headerImageView: UIImageView!
     private var headerLogo: UIImageView!
@@ -77,7 +78,7 @@ class MainView: UIViewController {
     }
     
     @objc func didTapButton() {
-        navigationController?.pushViewController(ShoppingListView(), animated: true)
+        coordinator?.navigateToShoppingView()
     }
     
     private func setupConstraints() {
@@ -110,7 +111,7 @@ class MainView: UIViewController {
             make.bottom.equalToSuperview().multipliedBy(0.98)
         }
         
-        if viewModel.savedLists.isEmpty {
+        if viewModel?.savedLists != nil {
             noListsImageView.contentMode = .scaleAspectFit
             noListsImageView.snp.makeConstraints { make in
                 make.centerX.centerY.equalToSuperview()

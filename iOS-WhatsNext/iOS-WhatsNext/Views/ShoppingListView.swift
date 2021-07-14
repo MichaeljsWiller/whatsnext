@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class ShoppingListView: UIViewController {
-    private let viewModel = ShoppingListViewModel()
+    weak var coordinator: AppCoordinator?
+    var viewModel: ShoppingListViewModel?
     private var addItemButton: UIButton!
     private var headerImageView: UIImageView!
     private var headerLogo: UIImageView!
@@ -16,6 +18,7 @@ class ShoppingListView: UIViewController {
     private var headerSubtitle: UILabel!
     private var tableView: UITableView!
     private let reuseId = "reuseId"
+    private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +27,7 @@ class ShoppingListView: UIViewController {
         setupConstraints()
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
-   
+    
     
     private func setupViews() {
         headerImageView = UIImageView()
@@ -110,23 +113,23 @@ class ShoppingListView: UIViewController {
         alert.addAction(UIAlertAction(title: "Add", style: .cancel, handler: { [weak self] _ in
             if let textField = alert.textFields?.first,
                let item = textField.text {
-                self?.viewModel.addNewItem(item: item)
+                self?.viewModel?.addNewItem(item: item)
                 self?.tableView.reloadData()
             }
         }))
         present(alert, animated: true)
-
+        
     }
 }
 
-
+// MARK: - UITableViewDelegate methods
 extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 1 :
-            return viewModel.currentList.items.count
-        case 2:
-            return viewModel.currentList.tickedItems.count
+        case 0 :
+            return (viewModel?.currentList.items.count)!
+        case 1:
+            return (viewModel?.currentList.tickedItems.count)!
         default:
             return 0
         }
@@ -134,10 +137,8 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
-        let currentItem = viewModel.currentList.items[indexPath.row].name
-        let tickedItem = viewModel.currentList.tickedItems[indexPath.row].name
-        let item = indexPath.section == 0 ? currentItem : tickedItem
-        cell.textLabel?.text = item
+        let currentItem = viewModel?.currentList.items[indexPath.row].name
+        cell.textLabel?.text = currentItem
         return cell
         
     }
@@ -146,7 +147,7 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         
         switch section {
         case 0:
-            return viewModel.currentList.title
+            return viewModel?.currentList.title
         case 1:
             return "Ticked off items"
         default:
@@ -159,11 +160,15 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        if ((viewModel?.currentList.tickedItems.isEmpty) != nil) {
+            return 1
+        } else {
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .black
+        (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .clear
         (view as! UITableViewHeaderFooterView).textLabel?.font = UIFont(name: "NewsGothicMT-Bold", size: 16)
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(red: 70/255, green: 91/255, blue: 105/255, alpha: 1)
         (view as! UITableViewHeaderFooterView).frame(forAlignmentRect: CGRect(x: 0,y: 40,width: self.view.bounds.width,height: 1))
