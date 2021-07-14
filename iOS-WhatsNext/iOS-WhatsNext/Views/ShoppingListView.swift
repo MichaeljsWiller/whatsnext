@@ -125,11 +125,12 @@ class ShoppingListView: UIViewController {
 // MARK: - UITableViewDelegate methods
 extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let viewModel = viewModel else { return 0 }
         switch section {
         case 0 :
-            return (viewModel?.currentList.items.count)!
+            return viewModel.currentList.items.count
         case 1:
-            return (viewModel?.currentList.tickedItems.count)!
+            return viewModel.currentList.tickedItems.count
         default:
             return 0
         }
@@ -160,7 +161,8 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if ((viewModel?.currentList.tickedItems.isEmpty) != nil) {
+        guard let viewModel = viewModel else { return 0 }
+        if viewModel.currentList.tickedItems.isEmpty {
             return 1
         } else {
             return 2
