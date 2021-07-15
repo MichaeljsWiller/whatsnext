@@ -154,6 +154,8 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
         let currentItem = viewModel?.currentList.items[indexPath.row].name
         cell.textLabel?.text = currentItem
+        cell.textLabel?.font = UIFont(name: "NewsGothicMT", size: 15)
+        cell.textLabel?.textColor = .primaryBlue
         return cell
         
     }
@@ -187,24 +189,26 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
         let editAction = UIContextualAction(style: .normal,
                                             title: "edit",
-                                            handler: { (
-                                                action,
-                                                view,
-                                                completionHandler) in
+                                            handler: { (action,
+                                                        view,
+                                                        completionHandler) in
                                                 self.editItem(indexPath: indexPath)
                                                 completionHandler(true)
                                             })
         editAction.image = UIImage(systemName: "pencil")
-        editAction.backgroundColor = .systemBlue
+        editAction.backgroundColor = .primaryBlue
         
-        let deleteAction = UIContextualAction(style: .destructive, title: "delete", handler: { (action, view, completionHandler) in
-            self.viewModel?.currentList.items.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
-            completionHandler(true)
-        })
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: "delete",
+                                              handler: { (action,
+                                                          view,
+                                                          completionHandler) in
+                                                self.viewModel?.currentList.items.remove(at: indexPath.row)
+                                                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                                                completionHandler(true)
+                                              })
         deleteAction.image = UIImage(systemName: "xmark.bin.fill")
         deleteAction.backgroundColor = .systemRed
         
@@ -215,7 +219,7 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         (view as! UITableViewHeaderFooterView).contentView.backgroundColor = .clear
         (view as! UITableViewHeaderFooterView).textLabel?.font = UIFont(name: "NewsGothicMT-Bold", size: 16)
-        (view as! UITableViewHeaderFooterView).textLabel?.textColor = UIColor(red: 70/255, green: 91/255, blue: 105/255, alpha: 1)
+        (view as! UITableViewHeaderFooterView).textLabel?.textColor = .primaryBlue
         (view as! UITableViewHeaderFooterView).frame(forAlignmentRect: CGRect(x: 0,y: 40,width: self.view.bounds.width,height: 1))
     }
 }
