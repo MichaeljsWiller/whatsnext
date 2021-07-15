@@ -244,7 +244,6 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
                                                     self.tableView.deleteRows(at: [indexPath], with: .fade)
                                                 } else if indexPath.section == 1 {
                                                     self.viewModel?.currentList.itemsInBasket.remove(at: indexPath.row)
-                                                    self.tableView.deleteRows(at: [indexPath], with: .fade)
                                                 }
                                                 tableView.reloadData()
                                                 completionHandler(true)
