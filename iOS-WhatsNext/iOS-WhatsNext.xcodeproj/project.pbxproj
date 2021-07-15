@@ -28,6 +28,7 @@
 		04D60BCB2540BE96006F47FC /* iOS_WhatsNextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */; };
 		AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */; };
 		AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */; };
+		AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		04D60BCC2540BE96006F47FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModel.swift; sourceTree = "<group>"; };
 		AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListModel.swift; sourceTree = "<group>"; };
+		AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				04C10FDD255B698500007128 /* MainView.swift */,
 				04CC9FCB258D6B5500C161D7 /* ShoppingListView.swift */,
+				AA3D1AF5269F67850013299C /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,6 +231,14 @@
 				AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		AA3D1AF5269F67850013299C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +388,7 @@
 				04C10FDE255B698500007128 /* MainView.swift in Sources */,
 				048799092558650B0069F16C /* Coordinator.swift in Sources */,
 				AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */,
+				AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */,
 				04D60BA92540BE94006F47FC /* AppDelegate.swift in Sources */,
 				04D60BAB2540BE94006F47FC /* SceneDelegate.swift in Sources */,
 				AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */,

@@ -19,6 +19,7 @@ class ShoppingListViewModel {
     
     /// Adds a new item to the shopping list
     func addNewItem(item: String) {
+        guard !item.isEmpty else { return }
         let newItem = Item(name: item, price: 0)
         currentList.items.append(newItem)
     }

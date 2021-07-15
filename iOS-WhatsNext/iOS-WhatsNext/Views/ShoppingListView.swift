@@ -118,7 +118,21 @@ class ShoppingListView: UIViewController {
             }
         }))
         present(alert, animated: true)
-        
+    }
+    
+    /// Edits the name of the item selected in the list
+    func editItem(indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Edit Item", message: nil, preferredStyle: .alert)
+        alert.addTextField(configurationHandler: nil)
+        alert.addAction(UIAlertAction(title: "Add", style: .cancel, handler: { [weak self] _ in
+            if let textField = alert.textFields?.first,
+               let item = textField.text,
+               !item.isEmpty {
+                self?.viewModel?.currentList.items[indexPath.row].name = item
+                self?.tableView.reloadData()
+            }
+        }))
+        present(alert, animated: true)
     }
 }
 
@@ -144,22 +158,6 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        switch section {
-        case 0:
-            return viewModel?.currentList.title
-        case 1:
-            return "Ticked off items"
-        default:
-            return "This shouldn't happen lol"
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let viewModel = viewModel else { return 0 }
         if viewModel.currentList.tickedItems.isEmpty {
@@ -167,6 +165,51 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         } else {
             return 2
         }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return viewModel?.currentList.title
+        case 1:
+            return "Ticked off items"
+        default:
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let editAction = UIContextualAction(style: .normal,
+                                            title: "edit",
+                                            handler: { (
+                                                action,
+                                                view,
+                                                completionHandler) in
+                                                self.editItem(indexPath: indexPath)
+                                                completionHandler(true)
+                                            })
+        editAction.image = UIImage(systemName: "pencil")
+        editAction.backgroundColor = .systemBlue
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: "delete", handler: { (action, view, completionHandler) in
+            self.viewModel?.currentList.items.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            completionHandler(true)
+        })
+        deleteAction.image = UIImage(systemName: "xmark.bin.fill")
+        deleteAction.backgroundColor = .systemRed
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+        return configuration
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
