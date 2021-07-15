@@ -8,8 +8,11 @@
 import UIKit
 import Combine
 
+/// A view that configures and displays a shopping list
 class ShoppingListView: UIViewController {
+    /// Controls navigation between views
     weak var coordinator: AppCoordinator?
+    /// The viewModel supporting the view
     var viewModel: ShoppingListViewModel?
     private var addItemButton: UIButton!
     private var headerImageView: UIImageView!
@@ -66,6 +69,7 @@ class ShoppingListView: UIViewController {
         tableView.dataSource = self
         tableView.backgroundColor = .clear
         tableView.tableHeaderView?.backgroundColor = .clear
+        tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseId)
         view.addSubview(tableView)
     }
@@ -107,6 +111,7 @@ class ShoppingListView: UIViewController {
         }
     }
     
+    /// Action for when the add new item button is tapped
     @objc func didTapButton() {
         let alert = UIAlertController(title: "New Item", message: "Enter a new Item:", preferredStyle: .alert)
         alert.addTextField(configurationHandler: nil)
@@ -123,8 +128,10 @@ class ShoppingListView: UIViewController {
     /// Edits the name of the item selected in the list
     func editItem(indexPath: IndexPath) {
         let alert = UIAlertController(title: "Edit Item", message: nil, preferredStyle: .alert)
-        alert.addTextField(configurationHandler: nil)
-        alert.addAction(UIAlertAction(title: "Add", style: .cancel, handler: { [weak self] _ in
+        alert.addTextField { (textfield: UITextField) in
+            textfield.text = self.viewModel?.currentList.items[indexPath.row].name
+        }
+        alert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { [weak self] _ in
             if let textField = alert.textFields?.first,
                let item = textField.text,
                !item.isEmpty {
@@ -144,25 +151,52 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         case 0 :
             return viewModel.currentList.items.count
         case 1:
-            return viewModel.currentList.tickedItems.count
+            return viewModel.currentList.itemsInBasket.count
         default:
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
-        let currentItem = viewModel?.currentList.items[indexPath.row].name
-        cell.textLabel?.text = currentItem
-        cell.textLabel?.font = UIFont(name: "NewsGothicMT", size: 15)
-        cell.textLabel?.textColor = .primaryBlue
-        return cell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: ShoppingListTableViewCell.identifier, for: indexPath) as! ShoppingListTableViewCell
+        switch indexPath.section {
+        case 0:
+            if let currentItem = viewModel?.currentList.items[indexPath.row] {
+                cell.configureCell(with: currentItem.name)
+                cell.$isItemSelected
+                    .receive(on: DispatchQueue.main)
+                    .sink { [weak self] itemIsSelected in
+                        if let itemIsSelected = itemIsSelected,
+                           itemIsSelected == true {
+                            self?.viewModel?.moveItemToBasket(from: indexPath)
+                            self?.tableView.reloadData()
+                            cell.isItemSelected = false
+                        }
+                        print(cell.isItemSelected)
+                    }
+                    .store(in: &cancellables)
+            }
+            return cell
+            
+        case 1:
+            let basketCell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
+            if let currentItem = viewModel?.currentList.itemsInBasket[indexPath.row].name {
+                let attributedString = NSMutableAttributedString(string: currentItem)
+                attributedString.addAttribute(.strikethroughStyle, value: 2, range: NSMakeRange(0, attributedString.length))
+                basketCell.textLabel?.attributedText = attributedString
+                basketCell.textLabel?.font = UIFont(name: "NewsGothicMT", size: 15)
+                basketCell.textLabel?.textColor = .primaryBlue
+                return basketCell
+            }
+        default:
+            return UITableViewCell()
+        }
+        return UITableViewCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         guard let viewModel = viewModel else { return 0 }
-        if viewModel.currentList.tickedItems.isEmpty {
+        if viewModel.currentList.itemsInBasket.isEmpty {
             return 1
         } else {
             return 2
@@ -174,7 +208,7 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return viewModel?.currentList.title
         case 1:
-            return "Ticked off items"
+            return "Items in basket"
         default:
             return nil
         }
@@ -205,15 +239,55 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
                                               handler: { (action,
                                                           view,
                                                           completionHandler) in
-                                                self.viewModel?.currentList.items.remove(at: indexPath.row)
-                                                self.tableView.deleteRows(at: [indexPath], with: .fade)
+                                                if indexPath.section == 0 {
+                                                    self.viewModel?.currentList.items.remove(at: indexPath.row)
+                                                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                                                } else if indexPath.section == 1 {
+                                                    self.viewModel?.currentList.itemsInBasket.remove(at: indexPath.row)
+                                                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                                                }
+                                                tableView.reloadData()
                                                 completionHandler(true)
                                               })
         deleteAction.image = UIImage(systemName: "xmark.bin.fill")
         deleteAction.backgroundColor = .systemRed
         
+        if indexPath.section == 1 {
+            let undoAction = UIContextualAction(style: .normal,
+                                                title: "undo",
+                                                handler: { (action,
+                                                            view,
+                                                            completionHandler) in
+                                                    self.viewModel?.undoItemMove(at: indexPath)
+                                                    self.tableView.reloadData()
+                                                  completionHandler(true)
+                                                })
+            undoAction.image = UIImage(systemName: "arrow.uturn.backward")
+            undoAction.backgroundColor = .systemOrange
+            let configuration = UISwipeActionsConfiguration(actions: [deleteAction, undoAction, editAction])
+            return configuration
+        }
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
         return configuration
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.section == 0 {
+            let basketAction = UIContextualAction(style: .destructive,
+                                                  title: "add",
+                                                  handler: { (action,
+                                                              view,
+                                                              completionHandler) in
+                                                      self.viewModel?.moveItemToBasket(from: indexPath)
+                                                      self.tableView.reloadData()
+                                                    completionHandler(true)
+                                                  })
+            basketAction.image = UIImage(systemName: "checkmark")
+            basketAction.backgroundColor = .primaryBlue
+              let configuration = UISwipeActionsConfiguration(actions: [basketAction])
+              return configuration
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
