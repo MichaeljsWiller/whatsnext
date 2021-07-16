@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 /// A view that configures and displays a shopping list
-class ShoppingListView: UIViewController {
+class ShoppingListView: UIViewController, ShoppingListDelegate {
     /// Controls navigation between views
     weak var coordinator: AppCoordinator?
     /// The viewModel supporting the view
@@ -125,6 +125,12 @@ class ShoppingListView: UIViewController {
         present(alert, animated: true)
     }
     
+    /// Moves the item in the cell at the index path to a different section
+    func moveItem(at indexPath: IndexPath) {
+        viewModel?.moveItemToBasket(from: indexPath)
+        tableView.reloadData()
+    }
+    
     /// Edits the name of the item selected in the list
     func editItem(indexPath: IndexPath) {
         let alert = UIAlertController(title: "Edit Item", message: nil, preferredStyle: .alert)
@@ -163,18 +169,8 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         case 0:
             if let currentItem = viewModel?.currentList.items[indexPath.row] {
                 cell.configureCell(with: currentItem.name)
-                cell.$isItemSelected
-                    .receive(on: DispatchQueue.main)
-                    .sink { [weak self] itemIsSelected in
-                        if let itemIsSelected = itemIsSelected,
-                           itemIsSelected == true {
-                            self?.viewModel?.moveItemToBasket(from: indexPath)
-                            self?.tableView.reloadData()
-                            cell.isItemSelected = false
-                        }
-                        print(cell.isItemSelected)
-                    }
-                    .store(in: &cancellables)
+                cell.delegate = self
+                cell.indexPath = indexPath
             }
             return cell
             
@@ -223,6 +219,7 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // Edit swipe action
         let editAction = UIContextualAction(style: .normal,
                                             title: "edit",
                                             handler: { (action,
@@ -234,6 +231,7 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         editAction.image = UIImage(systemName: "pencil")
         editAction.backgroundColor = .primaryBlue
         
+        // Delete swipe action
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: "delete",
                                               handler: { (action,
@@ -251,23 +249,28 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         deleteAction.image = UIImage(systemName: "xmark.bin.fill")
         deleteAction.backgroundColor = .systemRed
         
-        if indexPath.section == 1 {
-            let undoAction = UIContextualAction(style: .normal,
-                                                title: "undo",
-                                                handler: { (action,
-                                                            view,
-                                                            completionHandler) in
-                                                    self.viewModel?.undoItemMove(at: indexPath)
-                                                    self.tableView.reloadData()
-                                                  completionHandler(true)
-                                                })
-            undoAction.image = UIImage(systemName: "arrow.uturn.backward")
-            undoAction.backgroundColor = .systemOrange
-            let configuration = UISwipeActionsConfiguration(actions: [deleteAction, undoAction, editAction])
+        // Undo swipe action
+        let undoAction = UIContextualAction(style: .normal,
+                                            title: "undo",
+                                            handler: { (action,
+                                                        view,
+                                                        completionHandler) in
+                                                self.viewModel?.undoItemMove(at: indexPath)
+                                                self.tableView.reloadData()
+                                                completionHandler(true)
+                                            })
+        undoAction.image = UIImage(systemName: "arrow.uturn.backward")
+        undoAction.backgroundColor = .systemOrange
+        
+        if indexPath.section == 0 {
+            let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
             return configuration
         }
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
-        return configuration
+        if indexPath.section == 1 {
+            let configuration = UISwipeActionsConfiguration(actions: [deleteAction, undoAction])
+            return configuration
+        }
+        return nil
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -277,14 +280,14 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
                                                   handler: { (action,
                                                               view,
                                                               completionHandler) in
-                                                      self.viewModel?.moveItemToBasket(from: indexPath)
-                                                      self.tableView.reloadData()
+                                                    self.viewModel?.moveItemToBasket(from: indexPath)
+                                                    self.tableView.reloadData()
                                                     completionHandler(true)
                                                   })
             basketAction.image = UIImage(systemName: "checkmark")
             basketAction.backgroundColor = .primaryBlue
-              let configuration = UISwipeActionsConfiguration(actions: [basketAction])
-              return configuration
+            let configuration = UISwipeActionsConfiguration(actions: [basketAction])
+            return configuration
         }
         return nil
     }

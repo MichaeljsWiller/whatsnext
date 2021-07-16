@@ -7,29 +7,38 @@
 
 import Foundation
 import UIKit
-import Combine
 import SnapKit
+
+protocol ShoppingListDelegate: AnyObject {
+    func moveItem(at indexPath: IndexPath)
+}
 
 class ShoppingListTableViewCell: UITableViewCell {
     
+    weak var delegate: ShoppingListDelegate?
+    /// Identifies the cell for reusability
     static let identifier = "ShoppingListTableViewCell"
+    /// The index path of the cell
+    var indexPath: IndexPath?
+    /// Button to tick off the item from the list
     var tickButton: UIButton = UIButton(type: .custom)
+    /// Label for the item name
     var itemLabel: UILabel = UILabel()
-    @Published var isItemSelected: Bool? = nil
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(tickButton)
         addSubview(itemLabel)
         setupConstraints()
+        tickButton.addTarget(self, action: #selector(callDelegate), for: .touchUpInside)
     }
     
+    /// Populates the cell with a button and an item name
     func configureCell(with itemName: String) {
         if let image = UIImage(systemName: "circle") {
             tickButton.setImage(image, for: .normal)
             tickButton.setImage(UIImage(systemName: "circle.fill"), for: .highlighted)
             tickButton.tintColor = .primaryBlue
-            tickButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
             tickButton.isUserInteractionEnabled = true
         }
         itemLabel.text = itemName
@@ -37,9 +46,11 @@ class ShoppingListTableViewCell: UITableViewCell {
         itemLabel.textColor = .primaryBlue
     }
     
-    @objc func buttonAction(sender: UIButton!) {
-        isItemSelected = true
-       }
+    /// Calls the delegate to handle the button tap
+    @objc func callDelegate(sender: UIButton!) {
+        guard let indexPath = indexPath else { return }
+        self.delegate?.moveItem(at: indexPath)
+    }
     
     private func setupConstraints() {
         tickButton.snp.makeConstraints { make in
