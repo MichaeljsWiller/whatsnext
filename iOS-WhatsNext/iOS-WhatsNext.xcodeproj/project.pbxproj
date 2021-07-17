@@ -28,6 +28,8 @@
 		04D60BCB2540BE96006F47FC /* iOS_WhatsNextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */; };
 		AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */; };
 		AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */; };
+		AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */; };
+		AA3D1AFA269FCDA50013299C /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF9269FCDA50013299C /* Colours.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		04D60BCC2540BE96006F47FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModel.swift; sourceTree = "<group>"; };
 		AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListModel.swift; sourceTree = "<group>"; };
+		AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
+		AA3D1AF9269FCDA50013299C /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 			children = (
 				04C10FDD255B698500007128 /* MainView.swift */,
 				04CC9FCB258D6B5500C161D7 /* ShoppingListView.swift */,
+				AA3D1AF5269F67850013299C /* Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -170,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				04D60BA72540BE94006F47FC /* iOS-WhatsNext */,
-				04CC9F72258C340E00C161D7 /* Fonts */,
 				04D60BBE2540BE96006F47FC /* iOS-WhatsNextTests */,
 				04D60BC92540BE96006F47FC /* iOS-WhatsNextUITests */,
 				04D60BA62540BE94006F47FC /* Products */,
@@ -195,6 +199,7 @@
 				AA3861AE25ABBA1900784F4F /* Models */,
 				0487990425585A470069F16C /* Views */,
 				04CC9F69258C1C7200C161D7 /* ViewModels */,
+				AA3D1AFB269FCF000013299C /* Extensions */,
 				04D60BA82540BE94006F47FC /* AppDelegate.swift */,
 				04D60BAA2540BE94006F47FC /* SceneDelegate.swift */,
 				04D60BB12540BE95006F47FC /* Assets.xcassets */,
@@ -228,6 +233,31 @@
 				AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		AA3D1AF5269F67850013299C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		AA3D1AF8269FCD920013299C /* Colours */ = {
+			isa = PBXGroup;
+			children = (
+				AA3D1AF9269FCDA50013299C /* Colours.swift */,
+			);
+			path = Colours;
+			sourceTree = "<group>";
+		};
+		AA3D1AFB269FCF000013299C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04CC9F72258C340E00C161D7 /* Fonts */,
+				AA3D1AF8269FCD920013299C /* Colours */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -374,9 +404,11 @@
 			files = (
 				048E55E025575DBE00ED2193 /* SplashScreen.swift in Sources */,
 				04CC9FCC258D6B5500C161D7 /* ShoppingListView.swift in Sources */,
+				AA3D1AFA269FCDA50013299C /* Colours.swift in Sources */,
 				04C10FDE255B698500007128 /* MainView.swift in Sources */,
 				048799092558650B0069F16C /* Coordinator.swift in Sources */,
 				AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */,
+				AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */,
 				04D60BA92540BE94006F47FC /* AppDelegate.swift in Sources */,
 				04D60BAB2540BE94006F47FC /* SceneDelegate.swift in Sources */,
 				AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */,
