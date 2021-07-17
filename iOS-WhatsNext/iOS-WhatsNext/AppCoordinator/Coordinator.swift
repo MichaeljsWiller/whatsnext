@@ -47,5 +47,35 @@ class AppCoordinator: Coordinator {
         shoppingListVc.viewModel = shoppingListViewModel
         navigationController.pushViewController(shoppingListVc, animated: true)
     }
+    
+    
+    /// Displays an alert on the screen with the option to configure the alert with a TextField
+    /// - Parameters:
+    ///   - title: The title for the alert
+    ///   - message: The message the alert will show
+    ///   - actionTitle: The title for the action button
+    ///   - configuration: Optional to configure an added text field
+    ///   - completion: action to perform when the alert button has been pressed
+    func showAlertWith(title: String?,
+                       message: String?,
+                       actionTitle: String?,
+                       configuration: ((UITextField) -> Void)?,
+                       completion: ((String?) -> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addTextField { (textfield: UITextField) in
+            if let configuration = configuration {
+                configuration(textfield)
+            }
+        }
+        alert.addAction(UIAlertAction(title: actionTitle, style: .cancel, handler: { _ in
+            if let textField = alert.textFields?.first,
+               let item = textField.text {
+                if let completion = completion {
+                    completion(item)
+                }
+            }
+        }))
+        navigationController.present(alert, animated: true)
+    }
 }
 

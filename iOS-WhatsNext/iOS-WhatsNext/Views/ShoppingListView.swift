@@ -113,16 +113,15 @@ class ShoppingListView: UIViewController, ShoppingListDelegate {
     
     /// Action for when the add new item button is tapped
     @objc func didTapButton() {
-        let alert = UIAlertController(title: "New Item", message: "Enter a new Item:", preferredStyle: .alert)
-        alert.addTextField(configurationHandler: nil)
-        alert.addAction(UIAlertAction(title: "Add", style: .cancel, handler: { [weak self] _ in
-            if let textField = alert.textFields?.first,
-               let item = textField.text {
-                self?.viewModel?.addNewItem(item: item)
-                self?.tableView.reloadData()
-            }
-        }))
-        present(alert, animated: true)
+        coordinator?.showAlertWith(title: "New Item",
+                                   message: "Enter a new Item",
+                                   actionTitle: "Add",
+                                   configuration: nil,
+                                   completion: { item in
+                                    guard let item = item else { return }
+                                    self.viewModel?.addNewItem(item: item)
+                                    self.tableView.reloadData()
+                                   })
     }
     
     /// Moves the item in the cell at the index path to a different section
@@ -133,19 +132,20 @@ class ShoppingListView: UIViewController, ShoppingListDelegate {
     
     /// Edits the name of the item selected in the list
     func editItem(indexPath: IndexPath) {
-        let alert = UIAlertController(title: "Edit Item", message: nil, preferredStyle: .alert)
-        alert.addTextField { (textfield: UITextField) in
-            textfield.text = self.viewModel?.currentList.items[indexPath.row].name
-        }
-        alert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: { [weak self] _ in
-            if let textField = alert.textFields?.first,
-               let item = textField.text,
-               !item.isEmpty {
-                self?.viewModel?.currentList.items[indexPath.row].name = item
-                self?.tableView.reloadData()
-            }
-        }))
-        present(alert, animated: true)
+        coordinator?.showAlertWith(
+            title: "Edit Item",
+            message: nil,
+            actionTitle: "Done",
+            configuration: { textField in
+                textField.text = self.viewModel?.currentList.items[indexPath.row].name
+            },
+            completion: { [weak self] item in
+                guard let item = item else { return }
+                if !item.isEmpty {
+                    self?.viewModel?.currentList.items[indexPath.row].name = item
+                    self?.tableView.reloadData()
+                }
+            })
     }
 }
 
