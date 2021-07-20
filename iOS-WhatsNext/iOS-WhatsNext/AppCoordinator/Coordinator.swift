@@ -43,7 +43,8 @@ class AppCoordinator: Coordinator {
     func navigateToShoppingView() {
         let shoppingListVc = ShoppingListView()
         let shoppingListViewModel = ShoppingListViewModel()
-        shoppingListVc.coordinator = self
+        shoppingListViewModel.coordinator = self
+        shoppingListViewModel.delegate = shoppingListVc
         shoppingListVc.viewModel = shoppingListViewModel
         navigationController.pushViewController(shoppingListVc, animated: true)
     }

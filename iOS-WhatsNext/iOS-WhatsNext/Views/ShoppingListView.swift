@@ -9,9 +9,8 @@ import UIKit
 import Combine
 
 /// A view that configures and displays a shopping list
-class ShoppingListView: UIViewController, ShoppingListDelegate {
-    /// Controls navigation between views
-    weak var coordinator: AppCoordinator?
+class ShoppingListView: UIViewController, ShoppingListItemDelegate {
+    
     /// The viewModel supporting the view
     var viewModel: ShoppingListViewModel?
     private var addItemButton: UIButton!
@@ -20,15 +19,16 @@ class ShoppingListView: UIViewController, ShoppingListDelegate {
     private var headerTitle: UILabel!
     private var headerSubtitle: UILabel!
     private var tableView: UITableView!
+    private var menuButton: UIButton!
     private let reuseId = "reuseId"
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         setupViews()
         setupConstraints()
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     
@@ -61,8 +61,13 @@ class ShoppingListView: UIViewController, ShoppingListDelegate {
         addItemButton.titleLabel?.font = UIFont(name: "PTSans-Bold", size: 20)
         addItemButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -50, bottom: 16, right: 0)
         addItemButton.titleEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 18, right: 1)
-        addItemButton.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        addItemButton.addTarget(viewModel, action: #selector(viewModel?.didTapButton), for: .touchUpInside)
         view.addSubview(addItemButton)
+        
+        menuButton = UIButton(type: .custom)
+        menuButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
+        menuButton.tintColor = .white
+        view.addSubview(menuButton)
         
         tableView = UITableView()
         tableView.delegate = self
@@ -85,6 +90,13 @@ class ShoppingListView: UIViewController, ShoppingListDelegate {
         headerTitle.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().multipliedBy(0.9)
+        }
+        
+        menuButton.contentMode = .scaleAspectFit
+        menuButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().multipliedBy(0.95)
+            make.bottom.equalTo(headerImageView).multipliedBy(0.85)
+            make.size.equalTo(25)
         }
         
         headerSubtitle.snp.makeConstraints { make in
@@ -111,41 +123,9 @@ class ShoppingListView: UIViewController, ShoppingListDelegate {
         }
     }
     
-    /// Action for when the add new item button is tapped
-    @objc func didTapButton() {
-        coordinator?.showAlertWith(title: "New Item",
-                                   message: "Enter a new Item",
-                                   actionTitle: "Add",
-                                   configuration: nil,
-                                   completion: { item in
-                                    guard let item = item else { return }
-                                    self.viewModel?.addNewItem(item: item)
-                                    self.tableView.reloadData()
-                                   })
-    }
-    
-    /// Moves the item in the cell at the index path to a different section
-    func moveItem(at indexPath: IndexPath) {
-        viewModel?.moveItemToBasket(from: indexPath)
+    /// Called when items in the list have changed and reloads the table view
+    func listHasChanged() {
         tableView.reloadData()
-    }
-    
-    /// Edits the name of the item selected in the list
-    func editItem(indexPath: IndexPath) {
-        coordinator?.showAlertWith(
-            title: "Edit Item",
-            message: nil,
-            actionTitle: "Done",
-            configuration: { textField in
-                textField.text = self.viewModel?.currentList.items[indexPath.row].name
-            },
-            completion: { [weak self] item in
-                guard let item = item else { return }
-                if !item.isEmpty {
-                    self?.viewModel?.currentList.items[indexPath.row].name = item
-                    self?.tableView.reloadData()
-                }
-            })
     }
 }
 
@@ -169,7 +149,7 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         case 0:
             if let currentItem = viewModel?.currentList.items[indexPath.row] {
                 cell.configureCell(with: currentItem.name)
-                cell.delegate = self
+                cell.delegate = viewModel
                 cell.indexPath = indexPath
             }
             return cell
@@ -225,7 +205,7 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
                                             handler: { (action,
                                                         view,
                                                         completionHandler) in
-                                                self.editItem(indexPath: indexPath)
+                                                self.viewModel?.editItem(indexPath: indexPath)
                                                 completionHandler(true)
                                             })
         editAction.image = UIImage(systemName: "pencil")
