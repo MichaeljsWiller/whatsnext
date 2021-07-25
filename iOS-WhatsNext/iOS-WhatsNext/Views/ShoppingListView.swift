@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import Combine
 
 /// A view that configures and displays a shopping list
-class ShoppingListView: UIViewController, ShoppingListItemDelegate {
+class ShoppingListView: UIViewController, ShoppingListItemDelegate, UIViewControllerTransitioningDelegate {
     
     /// The viewModel supporting the view
     var viewModel: ShoppingListViewModel?
@@ -21,7 +20,6 @@ class ShoppingListView: UIViewController, ShoppingListItemDelegate {
     private var tableView: UITableView!
     private var menuButton: UIButton!
     private let reuseId = "reuseId"
-    private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +65,7 @@ class ShoppingListView: UIViewController, ShoppingListItemDelegate {
         menuButton = UIButton(type: .custom)
         menuButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
         menuButton.tintColor = .white
+        menuButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
         view.addSubview(menuButton)
         
         tableView = UITableView()
@@ -77,6 +76,17 @@ class ShoppingListView: UIViewController, ShoppingListItemDelegate {
         tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseId)
         view.addSubview(tableView)
+    }
+    
+    @objc func openMenu() {
+        let menuVc = MenuView()
+        menuVc.modalPresentationStyle = .custom
+        menuVc.transitioningDelegate = self
+        self.present(menuVc, animated: true, completion: nil)
+    }
+    
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
     }
     
     private func setupConstraints() {

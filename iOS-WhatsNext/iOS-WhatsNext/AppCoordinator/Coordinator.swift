@@ -35,7 +35,7 @@ class AppCoordinator: Coordinator {
     func showMain() {
         let mainVc = MainView()
         let mainViewModel = MainViewModel()
-        mainVc.coordinator = self
+        mainViewModel.coordinator = self
         mainVc.viewModel = mainViewModel
         navigationController.pushViewController(mainVc, animated: true)
     }

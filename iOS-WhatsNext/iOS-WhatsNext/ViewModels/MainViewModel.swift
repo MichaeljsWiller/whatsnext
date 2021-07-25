@@ -8,5 +8,6 @@
 import Foundation
 
 class MainViewModel {
+    weak var coordinator: AppCoordinator?
     var savedLists: [ShoppingList] = []
 }

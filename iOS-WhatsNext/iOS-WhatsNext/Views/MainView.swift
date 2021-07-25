@@ -9,7 +9,6 @@ import UIKit
 
 class MainView: UIViewController {
     var viewModel: MainViewModel?
-    weak var coordinator: AppCoordinator?
     private var createListButton: UIButton!
     private var headerImageView: UIImageView!
     private var headerLogo: UIImageView!
@@ -78,7 +77,7 @@ class MainView: UIViewController {
     }
     
     @objc func didTapButton() {
-        coordinator?.navigateToShoppingView()
+        viewModel?.coordinator?.navigateToShoppingView()
     }
     
     private func setupConstraints() {
@@ -102,7 +101,7 @@ class MainView: UIViewController {
         headerLogo.contentMode = .scaleAspectFit
         headerLogo.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalTo(headerTitle.snp.left).multipliedBy(0.7)
+            make.trailing.equalTo(headerTitle.snp.leading).multipliedBy(0.7)
         }
         
         createListButton.snp.makeConstraints { make in
