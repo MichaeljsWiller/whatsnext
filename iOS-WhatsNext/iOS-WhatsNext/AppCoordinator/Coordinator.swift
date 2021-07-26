@@ -49,6 +49,22 @@ class AppCoordinator: Coordinator {
         navigationController.pushViewController(shoppingListVc, animated: true)
     }
     
+    func openMenu() {
+        let menuVc = MenuView()
+        let menuVm = MenuViewModel()
+        menuVc.viewModel = menuVm
+        menuVm.coordinator = self
+        if let ha = navigationController.visibleViewController as? ShoppingListView {
+            menuVc.modalPresentationStyle = .custom
+            menuVc.transitioningDelegate = ha
+            ha.present(menuVc, animated: true, completion: nil)
+        }
+    }
+    
+    func dismissMenu() {
+        navigationController.dismiss(animated: true)
+    }
+    
     
     /// Displays an alert on the screen with the option to configure the alert with a TextField
     /// - Parameters:

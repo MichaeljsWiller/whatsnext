@@ -7,10 +7,11 @@
 
 import UIKit
 
+/// Presents a view modally over a parent view with a blurred effect
 class PresentationController: UIPresentationController {
     
-    let blurEffectView: UIVisualEffectView!
-    var tapGestureRecogniser: UITapGestureRecognizer = UITapGestureRecognizer()
+    private let blurEffectView: UIVisualEffectView!
+    private var tapGestureRecogniser: UITapGestureRecognizer = UITapGestureRecognizer()
     
     override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         let blurEffect = UIBlurEffect(style: .dark)
@@ -58,6 +59,7 @@ class PresentationController: UIPresentationController {
         blurEffectView.frame = containerView.bounds
     }
     
+    /// Dismisses the modally presented view
     @objc func dismissController() {
         self.presentedViewController.dismiss(animated: true, completion: nil)
     }

@@ -9,11 +9,12 @@ import UIKit
 
 class MenuView: UIViewController {
     
+    var viewModel: MenuViewModel?
+    var hasPointOrigin = false
+    var pointOrigin: CGPoint?
     private var dismissMenuImageView: UIImageView!
     private var tableView: UITableView!
     private let reuseId = "reuseId"
-    var hasPointOrigin = false
-    var pointOrigin: CGPoint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,28 @@ class MenuView: UIViewController {
         if !hasPointOrigin {
             hasPointOrigin = true
             pointOrigin = self.view.frame.origin
+        }
+    }
+    
+    /// Allows the user to swipe the menu down to dismiss it
+    @objc func swipeToDismiss(sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+        
+        guard translation.y >= 0 else { return }
+        
+        // Allows the view to only be moved vertically
+        view.frame.origin = CGPoint(x: 0, y: self.pointOrigin!.y + translation.y)
+        
+        if sender.state == .ended {
+            let dragVelocity = sender.velocity(in: view)
+            if dragVelocity.y >= 1300 {
+                viewModel?.closeMenu()
+            } else {
+                // set back to original position in view
+                UIView.animate(withDuration: 0.3) {
+                    self.view.frame.origin = self.pointOrigin ?? CGPoint(x: 0, y: 400)
+                }
+            }
         }
     }
     
@@ -43,29 +66,8 @@ class MenuView: UIViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseId)
         view.addSubview(tableView)
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureAction))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(swipeToDismiss))
         view.addGestureRecognizer(panGesture)
-    }
-    
-    @objc func panGestureAction(sender: UIPanGestureRecognizer) {
-        let translation = sender.translation(in: view)
-        
-        guard translation.y >= 0 else { return }
-        
-        // Allows the view to only be moved vertically
-        view.frame.origin = CGPoint(x: 0, y: self.pointOrigin!.y + translation.y)
-        
-        if sender.state == .ended {
-            let dragVelocity = sender.velocity(in: view)
-            if dragVelocity.y >= 1300 {
-                self.dismiss(animated: true, completion: nil)
-            } else {
-                // set back to original position in view
-                UIView.animate(withDuration: 0.3) {
-                    self.view.frame.origin = self.pointOrigin ?? CGPoint(x: 0, y: 400)
-                }
-            }
-        }
     }
     
     private func setupConstraints() {
@@ -83,6 +85,7 @@ class MenuView: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate methods
 extension MenuView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

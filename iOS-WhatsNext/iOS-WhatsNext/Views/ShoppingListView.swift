@@ -8,7 +8,7 @@
 import UIKit
 
 /// A view that configures and displays a shopping list
-class ShoppingListView: UIViewController, ShoppingListItemDelegate, UIViewControllerTransitioningDelegate {
+class ShoppingListView: UIViewController, ShoppingListItemDelegate {
     
     /// The viewModel supporting the view
     var viewModel: ShoppingListViewModel?
@@ -29,6 +29,10 @@ class ShoppingListView: UIViewController, ShoppingListItemDelegate, UIViewContro
         setupConstraints()
     }
     
+    /// Called when items in the list have changed and reloads the table view
+    func listHasChanged() {
+        tableView.reloadData()
+    }
     
     private func setupViews() {
         headerImageView = UIImageView()
@@ -65,7 +69,7 @@ class ShoppingListView: UIViewController, ShoppingListItemDelegate, UIViewContro
         menuButton = UIButton(type: .custom)
         menuButton.setImage(UIImage(systemName: "list.bullet"), for: .normal)
         menuButton.tintColor = .white
-        menuButton.addTarget(self, action: #selector(openMenu), for: .touchUpInside)
+        menuButton.addTarget(viewModel, action: #selector(viewModel?.openMenu), for: .touchUpInside)
         view.addSubview(menuButton)
         
         tableView = UITableView()
@@ -76,17 +80,6 @@ class ShoppingListView: UIViewController, ShoppingListItemDelegate, UIViewContro
         tableView.register(ShoppingListTableViewCell.self, forCellReuseIdentifier: ShoppingListTableViewCell.identifier)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseId)
         view.addSubview(tableView)
-    }
-    
-    @objc func openMenu() {
-        let menuVc = MenuView()
-        menuVc.modalPresentationStyle = .custom
-        menuVc.transitioningDelegate = self
-        self.present(menuVc, animated: true, completion: nil)
-    }
-    
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        PresentationController(presentedViewController: presented, presenting: presenting)
     }
     
     private func setupConstraints() {
@@ -132,15 +125,10 @@ class ShoppingListView: UIViewController, ShoppingListItemDelegate, UIViewContro
             make.leading.trailing.equalToSuperview()
         }
     }
-    
-    /// Called when items in the list have changed and reloads the table view
-    func listHasChanged() {
-        tableView.reloadData()
-    }
 }
 
 // MARK: - UITableViewDelegate methods
-extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
+extension ShoppingListView: UITableViewDelegate, UITableViewDataSource, UIViewControllerTransitioningDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
         switch section {
@@ -287,6 +275,11 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource {
         (view as! UITableViewHeaderFooterView).textLabel?.font = UIFont(name: "NewsGothicMT-Bold", size: 16)
         (view as! UITableViewHeaderFooterView).textLabel?.textColor = .primaryBlue
         (view as! UITableViewHeaderFooterView).frame(forAlignmentRect: CGRect(x: 0,y: 40,width: self.view.bounds.width,height: 1))
+    }
+    
+    // MARK: - UIViewControllerTransitioningDelegate methods
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        PresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
 

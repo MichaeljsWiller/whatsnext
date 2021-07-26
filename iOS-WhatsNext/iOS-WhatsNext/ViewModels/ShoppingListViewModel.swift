@@ -80,4 +80,9 @@ class ShoppingListViewModel: ShoppingListDelegate {
         currentList.itemsInBasket.append(newItemInBasket)
         delegate?.listHasChanged()
     }
+    
+    /// Opens the menu for the shopping list
+    @objc func openMenu() {
+        coordinator?.openMenu()
+    }
 }

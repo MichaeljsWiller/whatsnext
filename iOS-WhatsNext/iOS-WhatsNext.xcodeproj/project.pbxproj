@@ -33,6 +33,7 @@
 		AA877D6F26ADCD670016D565 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D6E26ADCD670016D565 /* PresentationController.swift */; };
 		AA877D7226ADEA280016D565 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7126ADEA280016D565 /* UIViewExtension.swift */; };
 		AA877D7426ADEAFE0016D565 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7326ADEAFE0016D565 /* MenuView.swift */; };
+		AA877D7626AE2D480016D565 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7526AE2D480016D565 /* MenuViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		AA877D6E26ADCD670016D565 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		AA877D7126ADEA280016D565 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		AA877D7326ADEAFE0016D565 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		AA877D7526AE2D480016D565 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				04CC9F6A258C1CA200C161D7 /* MainViewModel.swift */,
 				AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */,
+				AA877D7526AE2D480016D565 /* MenuViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				048E55E025575DBE00ED2193 /* SplashScreen.swift in Sources */,
 				AA877D6F26ADCD670016D565 /* PresentationController.swift in Sources */,
 				04CC9FCC258D6B5500C161D7 /* ShoppingListView.swift in Sources */,
+				AA877D7626AE2D480016D565 /* MenuViewModel.swift in Sources */,
 				AA3D1AFA269FCDA50013299C /* Colours.swift in Sources */,
 				04C10FDE255B698500007128 /* MainView.swift in Sources */,
 				048799092558650B0069F16C /* Coordinator.swift in Sources */,
