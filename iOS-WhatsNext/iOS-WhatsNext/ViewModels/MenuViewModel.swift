@@ -27,20 +27,8 @@ class MenuViewModel {
     
     /// Populates the menu with menu items
     func populate() {
-        let rename = MenuItem(name: "Rename") {
-            self.coordinator?.showAlertWith(
-                title: "Rename",
-                message: "Type the new name that you would like for this list.",
-                actionTitle: "Rename",
-                configuration: nil,
-                completion: { name in
-                    guard let name = name else { return }
-                    if !name.isEmpty {
-                        self.shoppingListVM?.currentList.title = name
-                        self.shoppingListVM?.delegate?.listHasChanged()
-                    }
-                })
-            self.shoppingListVM?.currentList.title = "hello"
+        let rename = MenuItem(name: "Rename") { [weak self] in
+            self?.shoppingListVM?.renameList()
         }
         menuItems.append(rename)
         

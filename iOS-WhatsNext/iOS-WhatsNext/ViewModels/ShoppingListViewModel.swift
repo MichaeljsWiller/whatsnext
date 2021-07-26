@@ -42,18 +42,6 @@ class ShoppingListViewModel: ShoppingListDelegate {
         delegate?.listHasChanged()
     }
     
-    /// Action for when the add new item button is tapped
-    @objc func didTapButton() {
-        coordinator?.showAlertWith(title: "New Item",
-                                   message: "Enter a new Item",
-                                   actionTitle: "Add",
-                                   configuration: nil,
-                                   completion: { item in
-                                    guard let item = item else { return }
-                                    self.addNewItem(item: item)
-                                   })
-    }
-    
     /// Edits the name of the item selected in the list
     func editItem(indexPath: IndexPath) {
         coordinator?.showAlertWith(
@@ -81,8 +69,37 @@ class ShoppingListViewModel: ShoppingListDelegate {
         delegate?.listHasChanged()
     }
     
+    /// Renames the current shopping list
+    func renameList() {
+    coordinator?.showAlertWith(
+        title: "Rename",
+        message: "Type the new name that you would like for this list.",
+        actionTitle: "Rename",
+        configuration: nil,
+        completion: { name in
+            guard let name = name else { return }
+            if !name.isEmpty {
+                self.currentList.title = name
+                self.delegate?.listHasChanged()
+                self.coordinator?.dismissMenu()
+            }
+        })
+    }
+    
     /// Opens the menu for the shopping list
     @objc func openMenu() {
         coordinator?.openMenu(viewModel: self)
+    }
+    
+    /// Action for when the add new item button is tapped
+    @objc func didTapButton() {
+        coordinator?.showAlertWith(title: "New Item",
+                                   message: "Enter a new Item",
+                                   actionTitle: "Add",
+                                   configuration: nil,
+                                   completion: { item in
+                                    guard let item = item else { return }
+                                    self.addNewItem(item: item)
+                                   })
     }
 }
