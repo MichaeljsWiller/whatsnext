@@ -31,11 +31,11 @@ class AppCoordinator: Coordinator {
     func splashCompleted() {
         showMain()
     }
-
+    
     func showMain() {
         let mainVc = MainView()
         let mainViewModel = MainViewModel()
-        mainVc.coordinator = self
+        mainViewModel.coordinator = self
         mainVc.viewModel = mainViewModel
         navigationController.pushViewController(mainVc, animated: true)
     }
@@ -43,9 +43,27 @@ class AppCoordinator: Coordinator {
     func navigateToShoppingView() {
         let shoppingListVc = ShoppingListView()
         let shoppingListViewModel = ShoppingListViewModel()
-        shoppingListVc.coordinator = self
+        shoppingListViewModel.coordinator = self
+        shoppingListViewModel.delegate = shoppingListVc
         shoppingListVc.viewModel = shoppingListViewModel
         navigationController.pushViewController(shoppingListVc, animated: true)
+    }
+    
+    func openMenu(viewModel: ShoppingListViewModel) {
+        let menuVc = MenuView()
+        let menuVm = MenuViewModel()
+        menuVm.shoppingListVM = viewModel
+        menuVc.viewModel = menuVm
+        menuVm.coordinator = self
+        if let currentView = navigationController.visibleViewController as? ShoppingListView {
+            menuVc.modalPresentationStyle = .custom
+            menuVc.transitioningDelegate = currentView
+            currentView.present(menuVc, animated: true, completion: nil)
+        }
+    }
+    
+    func dismissMenu() {
+        navigationController.dismiss(animated: true)
     }
     
     
@@ -75,7 +93,7 @@ class AppCoordinator: Coordinator {
                 }
             }
         }))
-        navigationController.present(alert, animated: true)
+        navigationController.visibleViewController?.present(alert, animated: true)
     }
 }
 

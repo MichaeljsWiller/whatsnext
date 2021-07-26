@@ -26,10 +26,15 @@
 		04D60BB52540BE95006F47FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D60BB32540BE95006F47FC /* LaunchScreen.storyboard */; };
 		04D60BC02540BE96006F47FC /* iOS_WhatsNextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BBF2540BE96006F47FC /* iOS_WhatsNextTests.swift */; };
 		04D60BCB2540BE96006F47FC /* iOS_WhatsNextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */; };
+		AA2A21B926AE3CC000F26D7F /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A21B826AE3CC000F26D7F /* MenuItem.swift */; };
 		AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */; };
 		AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */; };
 		AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */; };
 		AA3D1AFA269FCDA50013299C /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF9269FCDA50013299C /* Colours.swift */; };
+		AA877D6F26ADCD670016D565 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D6E26ADCD670016D565 /* PresentationController.swift */; };
+		AA877D7226ADEA280016D565 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7126ADEA280016D565 /* UIViewExtension.swift */; };
+		AA877D7426ADEAFE0016D565 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7326ADEAFE0016D565 /* MenuView.swift */; };
+		AA877D7626AE2D480016D565 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7526AE2D480016D565 /* MenuViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,10 +79,15 @@
 		04D60BC62540BE96006F47FC /* iOS-WhatsNextUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-WhatsNextUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_WhatsNextUITests.swift; sourceTree = "<group>"; };
 		04D60BCC2540BE96006F47FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA2A21B826AE3CC000F26D7F /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModel.swift; sourceTree = "<group>"; };
 		AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListModel.swift; sourceTree = "<group>"; };
 		AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
 		AA3D1AF9269FCDA50013299C /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
+		AA877D6E26ADCD670016D565 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		AA877D7126ADEA280016D565 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		AA877D7326ADEAFE0016D565 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		AA877D7526AE2D480016D565 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,7 +121,9 @@
 			children = (
 				04C10FDD255B698500007128 /* MainView.swift */,
 				04CC9FCB258D6B5500C161D7 /* ShoppingListView.swift */,
+				AA877D7326ADEAFE0016D565 /* MenuView.swift */,
 				AA3D1AF5269F67850013299C /* Cells */,
+				AA877D7026ADE99A0016D565 /* Presentation Controller */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -137,6 +149,7 @@
 			children = (
 				04CC9F6A258C1CA200C161D7 /* MainViewModel.swift */,
 				AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */,
+				AA877D7526AE2D480016D565 /* MenuViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -231,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */,
+				AA2A21B826AE3CC000F26D7F /* MenuItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -254,10 +268,19 @@
 		AA3D1AFB269FCF000013299C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AA877D7126ADEA280016D565 /* UIViewExtension.swift */,
 				04CC9F72258C340E00C161D7 /* Fonts */,
 				AA3D1AF8269FCD920013299C /* Colours */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AA877D7026ADE99A0016D565 /* Presentation Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AA877D6E26ADCD670016D565 /* PresentationController.swift */,
+			);
+			path = "Presentation Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,14 +426,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				048E55E025575DBE00ED2193 /* SplashScreen.swift in Sources */,
+				AA877D6F26ADCD670016D565 /* PresentationController.swift in Sources */,
 				04CC9FCC258D6B5500C161D7 /* ShoppingListView.swift in Sources */,
+				AA877D7626AE2D480016D565 /* MenuViewModel.swift in Sources */,
 				AA3D1AFA269FCDA50013299C /* Colours.swift in Sources */,
 				04C10FDE255B698500007128 /* MainView.swift in Sources */,
 				048799092558650B0069F16C /* Coordinator.swift in Sources */,
 				AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */,
+				AA877D7426ADEAFE0016D565 /* MenuView.swift in Sources */,
 				AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */,
 				04D60BA92540BE94006F47FC /* AppDelegate.swift in Sources */,
+				AA877D7226ADEA280016D565 /* UIViewExtension.swift in Sources */,
 				04D60BAB2540BE94006F47FC /* SceneDelegate.swift in Sources */,
+				AA2A21B926AE3CC000F26D7F /* MenuItem.swift in Sources */,
 				AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */,
 				04CC9F6B258C1CA200C161D7 /* MainViewModel.swift in Sources */,
 			);

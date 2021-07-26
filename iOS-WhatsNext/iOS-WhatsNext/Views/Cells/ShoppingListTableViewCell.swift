@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol ShoppingListDelegate: AnyObject {
-    func moveItem(at indexPath: IndexPath)
+    func moveItemToBasket(from indexPath: IndexPath)
 }
 
 class ShoppingListTableViewCell: UITableViewCell {
@@ -49,7 +49,7 @@ class ShoppingListTableViewCell: UITableViewCell {
     /// Calls the delegate to handle the button tap
     @objc func callDelegate(sender: UIButton!) {
         guard let indexPath = indexPath else { return }
-        self.delegate?.moveItem(at: indexPath)
+        self.delegate?.moveItemToBasket(from: indexPath)
     }
     
     private func setupConstraints() {
