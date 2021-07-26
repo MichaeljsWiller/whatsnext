@@ -54,10 +54,10 @@ class AppCoordinator: Coordinator {
         let menuVm = MenuViewModel()
         menuVc.viewModel = menuVm
         menuVm.coordinator = self
-        if let ha = navigationController.visibleViewController as? ShoppingListView {
+        if let currentView = navigationController.visibleViewController as? ShoppingListView {
             menuVc.modalPresentationStyle = .custom
-            menuVc.transitioningDelegate = ha
-            ha.present(menuVc, animated: true, completion: nil)
+            menuVc.transitioningDelegate = currentView
+            currentView.present(menuVc, animated: true, completion: nil)
         }
     }
     
