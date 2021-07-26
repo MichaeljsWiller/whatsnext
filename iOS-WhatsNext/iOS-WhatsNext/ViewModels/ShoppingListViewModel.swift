@@ -43,7 +43,7 @@ class ShoppingListViewModel: ShoppingListDelegate {
     }
     
     /// Edits the name of the item selected in the list
-    func editItem(indexPath: IndexPath) {
+    func editItemName(at indexPath: IndexPath) {
         coordinator?.showAlertWith(
             title: "Edit Item",
             message: nil,

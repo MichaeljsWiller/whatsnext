@@ -203,7 +203,7 @@ extension ShoppingListView: UITableViewDelegate, UITableViewDataSource, UIViewCo
                                             handler: { (action,
                                                         view,
                                                         completionHandler) in
-                                                self.viewModel?.editItem(indexPath: indexPath)
+                                                self.viewModel?.editItemName(at: indexPath)
                                                 completionHandler(true)
                                             })
         editAction.image = UIImage(systemName: "pencil")
