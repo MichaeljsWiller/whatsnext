@@ -31,7 +31,7 @@ class AppCoordinator: Coordinator {
     func splashCompleted() {
         showMain()
     }
-
+    
     func showMain() {
         let mainVc = MainView()
         let mainViewModel = MainViewModel()
@@ -49,9 +49,10 @@ class AppCoordinator: Coordinator {
         navigationController.pushViewController(shoppingListVc, animated: true)
     }
     
-    func openMenu() {
+    func openMenu(viewModel: ShoppingListViewModel) {
         let menuVc = MenuView()
         let menuVm = MenuViewModel()
+        menuVm.shoppingListVM = viewModel
         menuVc.viewModel = menuVm
         menuVm.coordinator = self
         if let currentView = navigationController.visibleViewController as? ShoppingListView {
@@ -92,7 +93,7 @@ class AppCoordinator: Coordinator {
                 }
             }
         }))
-        navigationController.present(alert, animated: true)
+        navigationController.visibleViewController?.present(alert, animated: true)
     }
 }
 

@@ -83,6 +83,6 @@ class ShoppingListViewModel: ShoppingListDelegate {
     
     /// Opens the menu for the shopping list
     @objc func openMenu() {
-        coordinator?.openMenu()
+        coordinator?.openMenu(viewModel: self)
     }
 }

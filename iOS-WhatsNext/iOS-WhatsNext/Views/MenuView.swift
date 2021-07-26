@@ -89,17 +89,22 @@ class MenuView: UIViewController {
 extension MenuView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        guard let viewModel = viewModel else { return 0 }
+        
+        return viewModel.menuItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
-        cell.textLabel?.text = "Rename List"
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseId, for: indexPath)
+        cell.textLabel?.text = viewModel?.menuItems[indexPath.row].name
         cell.textLabel?.font = UIFont(name: "NewsGothicMT-Bold", size: 20)
         cell.textLabel?.textColor = .white
+        cell.selectionStyle = .none
         cell.backgroundColor = .clear
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.menuItems[indexPath.row].action()
+    }
 }
