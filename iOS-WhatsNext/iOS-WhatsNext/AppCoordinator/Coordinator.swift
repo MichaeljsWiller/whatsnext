@@ -12,6 +12,7 @@ protocol Coordinator {
 }
 
 class AppCoordinator: Coordinator {
+    
     let window: UIWindow
     var navigationController = UINavigationController()
     
@@ -96,4 +97,3 @@ class AppCoordinator: Coordinator {
         navigationController.visibleViewController?.present(alert, animated: true)
     }
 }
-

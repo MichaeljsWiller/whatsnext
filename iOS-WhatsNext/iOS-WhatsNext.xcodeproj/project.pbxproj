@@ -24,17 +24,18 @@
 		04D60BAB2540BE94006F47FC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BAA2540BE94006F47FC /* SceneDelegate.swift */; };
 		04D60BB22540BE95006F47FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04D60BB12540BE95006F47FC /* Assets.xcassets */; };
 		04D60BB52540BE95006F47FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D60BB32540BE95006F47FC /* LaunchScreen.storyboard */; };
-		04D60BC02540BE96006F47FC /* iOS_WhatsNextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BBF2540BE96006F47FC /* iOS_WhatsNextTests.swift */; };
 		04D60BCB2540BE96006F47FC /* iOS_WhatsNextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */; };
 		AA2A21B926AE3CC000F26D7F /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A21B826AE3CC000F26D7F /* MenuItem.swift */; };
 		AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */; };
 		AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */; };
 		AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */; };
 		AA3D1AFA269FCDA50013299C /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF9269FCDA50013299C /* Colours.swift */; };
+		AA739F8A26C8636300C864D1 /* ShoppingListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739F8926C8636300C864D1 /* ShoppingListViewModelTests.swift */; };
 		AA877D6F26ADCD670016D565 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D6E26ADCD670016D565 /* PresentationController.swift */; };
 		AA877D7226ADEA280016D565 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7126ADEA280016D565 /* UIViewExtension.swift */; };
 		AA877D7426ADEAFE0016D565 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7326ADEAFE0016D565 /* MenuView.swift */; };
 		AA877D7626AE2D480016D565 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7526AE2D480016D565 /* MenuViewModel.swift */; };
+		AAC8944226DC3D2900C6A2C6 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC8944126DC3D2900C6A2C6 /* ViewHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +75,6 @@
 		04D60BB42540BE95006F47FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04D60BB62540BE95006F47FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04D60BBB2540BE96006F47FC /* iOS-WhatsNextTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-WhatsNextTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		04D60BBF2540BE96006F47FC /* iOS_WhatsNextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_WhatsNextTests.swift; sourceTree = "<group>"; };
 		04D60BC12540BE96006F47FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04D60BC62540BE96006F47FC /* iOS-WhatsNextUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-WhatsNextUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_WhatsNextUITests.swift; sourceTree = "<group>"; };
@@ -84,10 +84,12 @@
 		AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListModel.swift; sourceTree = "<group>"; };
 		AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
 		AA3D1AF9269FCDA50013299C /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
+		AA739F8926C8636300C864D1 /* ShoppingListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModelTests.swift; sourceTree = "<group>"; };
 		AA877D6E26ADCD670016D565 /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		AA877D7126ADEA280016D565 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		AA877D7326ADEAFE0016D565 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AA877D7526AE2D480016D565 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		AAC8944126DC3D2900C6A2C6 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,7 +227,8 @@
 		04D60BBE2540BE96006F47FC /* iOS-WhatsNextTests */ = {
 			isa = PBXGroup;
 			children = (
-				04D60BBF2540BE96006F47FC /* iOS_WhatsNextTests.swift */,
+				AA739F8926C8636300C864D1 /* ShoppingListViewModelTests.swift */,
+				AAC8944026DC3CB900C6A2C6 /* Helpers */,
 				04D60BC12540BE96006F47FC /* Info.plist */,
 			);
 			path = "iOS-WhatsNextTests";
@@ -281,6 +284,14 @@
 				AA877D6E26ADCD670016D565 /* PresentationController.swift */,
 			);
 			path = "Presentation Controller";
+			sourceTree = "<group>";
+		};
+		AAC8944026DC3CB900C6A2C6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AAC8944126DC3D2900C6A2C6 /* ViewHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -448,7 +459,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04D60BC02540BE96006F47FC /* iOS_WhatsNextTests.swift in Sources */,
+				AAC8944226DC3D2900C6A2C6 /* ViewHelper.swift in Sources */,
+				AA739F8A26C8636300C864D1 /* ShoppingListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
