@@ -16,7 +16,7 @@ class MainViewModel {
   }
   func createNewList() -> ShoppingList {
     let newList = ShoppingList(context: context)
-    newList.title = "NewList"
+    newList.title = "New List"
     newList.items = []
     
     do {

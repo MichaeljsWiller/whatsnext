@@ -10,9 +10,9 @@ import UIKit
 
 /// Extends UIColor to add custom colours
 extension UIColor {
-    
-    /// The primary colour for the appp
-    static var primaryBlue: UIColor {
-        return UIColor(red: 70/255, green: 91/255, blue: 105/255, alpha: 1)
-    }
+  
+  /// The primary colour for the appp
+  static var primaryBlue: UIColor {
+    return UIColor(red: 70/255, green: 91/255, blue: 105/255, alpha: 1)
+  }
 }
