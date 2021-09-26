@@ -14,7 +14,7 @@ protocol Coordinator {
 class AppCoordinator: Coordinator {
     
     let window: UIWindow
-    var navigationController = UINavigationController()
+    let navigationController = UINavigationController()
     
     init(window: UIWindow) {
         self.window = window
@@ -41,9 +41,9 @@ class AppCoordinator: Coordinator {
         navigationController.pushViewController(mainVc, animated: true)
     }
     
-    func navigateToShoppingView() {
+  func navigateToShoppingView(with list: ShoppingList) {
         let shoppingListVc = ShoppingListView()
-        let shoppingListViewModel = ShoppingListViewModel()
+        let shoppingListViewModel = ShoppingListViewModel(currentList: list)
         shoppingListViewModel.coordinator = self
         shoppingListViewModel.delegate = shoppingListVc
         shoppingListVc.viewModel = shoppingListViewModel
@@ -75,11 +75,13 @@ class AppCoordinator: Coordinator {
     ///   - actionTitle: The title for the action button
     ///   - configuration: Optional to configure an added text field
     ///   - completion: action to perform when the alert button has been pressed
-    func showAlertWith(title: String?,
-                       message: String?,
-                       actionTitle: String?,
-                       configuration: ((UITextField) -> Void)?,
-                       completion: ((String?) -> Void)?) {
+    func showAlertWith(
+        title: String?,
+        message: String?,
+        actionTitle: String?,
+        configuration: ((UITextField) -> Void)?,
+        completion: ((String?) -> Void)?
+    ) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addTextField { (textfield: UITextField) in
             if let configuration = configuration {

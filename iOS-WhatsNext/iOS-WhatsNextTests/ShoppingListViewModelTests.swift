@@ -56,8 +56,9 @@ class ShoppingListViewModelTests: XCTestCase {
             viewModel.addNewItem(item: item)
         }
         // Expect the list to contain all items added by the user
-        XCTAssertTrue(viewModel.currentList.items.contains {$0.name == item1})
-        XCTAssertTrue(viewModel.currentList.items.contains {$0.name == item2})
-        XCTAssertTrue(viewModel.currentList.items.contains {$0.name == item3})
-        XCTAssertTrue(viewModel.currentList.items.contains {$0.name == item4})
+        XCTAssertTrue(viewModel.currentList.items.contains { $0.name == item1 })
+        XCTAssertTrue(viewModel.currentList.items.contains { $0.name == item2 })
+        XCTAssertTrue(viewModel.currentList.items.contains { $0.name == item3 })
+        XCTAssertTrue(viewModel.currentList.items.contains { $0.name == item4 })
     }
+}

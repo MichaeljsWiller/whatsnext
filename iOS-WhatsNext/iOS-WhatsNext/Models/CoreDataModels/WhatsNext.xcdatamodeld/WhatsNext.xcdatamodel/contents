@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ShoppingList" representedClassName="ShoppingList" syncable="YES">
+        <attribute name="title" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShoppingListItem" inverseName="origin" inverseEntity="ShoppingListItem"/>
+    </entity>
+    <entity name="ShoppingListItem" representedClassName="ShoppingListItem" syncable="YES">
+        <attribute name="inBasket" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="price" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="origin" maxCount="1" deletionRule="Nullify" destinationEntity="ShoppingList" inverseName="items" inverseEntity="ShoppingList"/>
+    </entity>
+    <elements>
+        <element name="ShoppingListItem" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="ShoppingList" positionX="-63" positionY="0" width="128" height="59"/>
+    </elements>
+</model>

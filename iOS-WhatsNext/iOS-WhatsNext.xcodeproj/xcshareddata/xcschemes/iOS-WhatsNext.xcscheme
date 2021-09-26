@@ -70,6 +70,12 @@
             ReferencedContainer = "container:iOS-WhatsNext.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-ResetOnLaunch"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
          <AdditionalOption
             key = "MallocStackLogging"

@@ -27,7 +27,6 @@
 		04D60BCB2540BE96006F47FC /* iOS_WhatsNextUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D60BCA2540BE96006F47FC /* iOS_WhatsNextUITests.swift */; };
 		AA2A21B926AE3CC000F26D7F /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2A21B826AE3CC000F26D7F /* MenuItem.swift */; };
 		AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */; };
-		AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */; };
 		AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */; };
 		AA3D1AFA269FCDA50013299C /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3D1AF9269FCDA50013299C /* Colours.swift */; };
 		AA739F8A26C8636300C864D1 /* ShoppingListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA739F8926C8636300C864D1 /* ShoppingListViewModelTests.swift */; };
@@ -36,6 +35,11 @@
 		AA877D7426ADEAFE0016D565 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7326ADEAFE0016D565 /* MenuView.swift */; };
 		AA877D7626AE2D480016D565 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA877D7526AE2D480016D565 /* MenuViewModel.swift */; };
 		AAC8944226DC3D2900C6A2C6 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAC8944126DC3D2900C6A2C6 /* ViewHelper.swift */; };
+		AAC8948426E57A2300C6A2C6 /* WhatsNext.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAC8948226E57A2300C6A2C6 /* WhatsNext.xcdatamodeld */; };
+		AAE4B85127010CEF00B1570C /* ShoppingListItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4B84D27010CEF00B1570C /* ShoppingListItem+CoreDataClass.swift */; };
+		AAE4B85227010CEF00B1570C /* ShoppingListItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4B84E27010CEF00B1570C /* ShoppingListItem+CoreDataProperties.swift */; };
+		AAE4B85327010CEF00B1570C /* ShoppingList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4B84F27010CEF00B1570C /* ShoppingList+CoreDataClass.swift */; };
+		AAE4B85427010CEF00B1570C /* ShoppingList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE4B85027010CEF00B1570C /* ShoppingList+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +85,6 @@
 		04D60BCC2540BE96006F47FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA2A21B826AE3CC000F26D7F /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		AA38618C25AB5D9000784F4F /* ShoppingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModel.swift; sourceTree = "<group>"; };
-		AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListModel.swift; sourceTree = "<group>"; };
 		AA3D1AF6269F67980013299C /* ShoppingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewCell.swift; sourceTree = "<group>"; };
 		AA3D1AF9269FCDA50013299C /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
 		AA739F8926C8636300C864D1 /* ShoppingListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListViewModelTests.swift; sourceTree = "<group>"; };
@@ -90,6 +93,11 @@
 		AA877D7326ADEAFE0016D565 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		AA877D7526AE2D480016D565 /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		AAC8944126DC3D2900C6A2C6 /* ViewHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelper.swift; sourceTree = "<group>"; };
+		AAC8948326E57A2300C6A2C6 /* WhatsNext.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WhatsNext.xcdatamodel; sourceTree = "<group>"; };
+		AAE4B84D27010CEF00B1570C /* ShoppingListItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingListItem+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		AAE4B84E27010CEF00B1570C /* ShoppingListItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingListItem+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		AAE4B84F27010CEF00B1570C /* ShoppingList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingList+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		AAE4B85027010CEF00B1570C /* ShoppingList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShoppingList+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,7 +254,7 @@
 		AA3861AE25ABBA1900784F4F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AA3861AF25ABBA3700784F4F /* ShoppingListModel.swift */,
+				AAE4B81227008C8D00B1570C /* CoreDataModels */,
 				AA2A21B826AE3CC000F26D7F /* MenuItem.swift */,
 			);
 			path = Models;
@@ -292,6 +300,18 @@
 				AAC8944126DC3D2900C6A2C6 /* ViewHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AAE4B81227008C8D00B1570C /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				AAE4B84D27010CEF00B1570C /* ShoppingListItem+CoreDataClass.swift */,
+				AAE4B84E27010CEF00B1570C /* ShoppingListItem+CoreDataProperties.swift */,
+				AAE4B84F27010CEF00B1570C /* ShoppingList+CoreDataClass.swift */,
+				AAE4B85027010CEF00B1570C /* ShoppingList+CoreDataProperties.swift */,
+				AAC8948226E57A2300C6A2C6 /* WhatsNext.xcdatamodeld */,
+			);
+			path = CoreDataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -440,16 +460,20 @@
 				AA877D6F26ADCD670016D565 /* PresentationController.swift in Sources */,
 				04CC9FCC258D6B5500C161D7 /* ShoppingListView.swift in Sources */,
 				AA877D7626AE2D480016D565 /* MenuViewModel.swift in Sources */,
+				AAE4B85227010CEF00B1570C /* ShoppingListItem+CoreDataProperties.swift in Sources */,
 				AA3D1AFA269FCDA50013299C /* Colours.swift in Sources */,
 				04C10FDE255B698500007128 /* MainView.swift in Sources */,
+				AAE4B85427010CEF00B1570C /* ShoppingList+CoreDataProperties.swift in Sources */,
 				048799092558650B0069F16C /* Coordinator.swift in Sources */,
-				AA3861B025ABBA3700784F4F /* ShoppingListModel.swift in Sources */,
+				AAC8948426E57A2300C6A2C6 /* WhatsNext.xcdatamodeld in Sources */,
 				AA877D7426ADEAFE0016D565 /* MenuView.swift in Sources */,
 				AA3D1AF7269F67980013299C /* ShoppingListTableViewCell.swift in Sources */,
 				04D60BA92540BE94006F47FC /* AppDelegate.swift in Sources */,
 				AA877D7226ADEA280016D565 /* UIViewExtension.swift in Sources */,
 				04D60BAB2540BE94006F47FC /* SceneDelegate.swift in Sources */,
+				AAE4B85327010CEF00B1570C /* ShoppingList+CoreDataClass.swift in Sources */,
 				AA2A21B926AE3CC000F26D7F /* MenuItem.swift in Sources */,
+				AAE4B85127010CEF00B1570C /* ShoppingListItem+CoreDataClass.swift in Sources */,
 				AA38618D25AB5D9000784F4F /* ShoppingListViewModel.swift in Sources */,
 				04CC9F6B258C1CA200C161D7 /* MainViewModel.swift in Sources */,
 			);
@@ -796,6 +820,19 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		AAC8948226E57A2300C6A2C6 /* WhatsNext.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AAC8948326E57A2300C6A2C6 /* WhatsNext.xcdatamodel */,
+			);
+			currentVersion = AAC8948326E57A2300C6A2C6 /* WhatsNext.xcdatamodel */;
+			path = WhatsNext.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 04D60B9D2540BE94006F47FC /* Project object */;
 }
